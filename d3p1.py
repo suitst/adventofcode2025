@@ -9,14 +9,14 @@ def find_biggest_number(string):
     max_ten_pos = 0
     max_one = 0
 
-    trimmed_string = string[:-1]
+    trimmed_string = string[:-1] # prevents 9 in final position being chosen as max number
 
     for char in trimmed_string:
         if int(char) > max_ten:
             max_ten = int(char)
             max_ten_pos = string.find(char)
 
-    truncated_string = string[max_ten_pos + 1:]
+    truncated_string = string[max_ten_pos + 1:] # truncates string to start of biggest number then repeats search
     for char in truncated_string:
         if int(char) > max_one:
             max_one = int(char)
