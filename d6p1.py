@@ -22,7 +22,7 @@ def get_grand_total(df):
     df['result'] = df.apply(
     lambda row: (
         sum(row[cols]) if row['operator'] == '+'
-        else eval('*'.join(map(str, row[cols])))  # Safely compute product
+        else eval('*'.join(map(str, row[cols])))
     ),
     axis=1
 )
