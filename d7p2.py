@@ -13,36 +13,6 @@ def find_splitters(input_list):
     return splitter_dict
 
 
-def generate_beams(input_list, splitter_dict):
-    source = 0
-    timelines = 0
-    for index, value in enumerate(input_list[0]):
-        if value == "S":
-            source = index
-    
-    beam_locs = [source]
-    for key in splitter_dict.keys():
-        was_split = []
-        num_splits = 0
-        for beam in sorted(beam_locs):
-            if beam in splitter_dict[key]:
-                num_splits += 1
-                was_split.append(beam)
-                if beam+1 not in beam_locs:
-                    beam_locs.append(beam+1)
-                if beam-1 not in beam_locs:
-                    beam_locs.append(beam-1)
-                beam_locs.remove(beam)
-        was_not_split = [beam for beam in beam_locs if beam not in was_split]
-        if len(splitter_dict[key]) > 0:
-            timelines += (2 * num_splits)
-            #print(splitter_dict[key])
-            #print(sorted(beam_locs))
-            #print(timelines)
-
-    return sorted(beam_locs), num_splits, timelines
-
-
 def count_timelines(input_list, splitter_dict):
     beam_array = np.zeros((len(input_list), len(input_list[0])))
 
@@ -69,7 +39,6 @@ def get_input_list(path):
     return input_list
 
 
-
 if __name__ == "__main__":
 
     test_input = [
@@ -90,7 +59,6 @@ if __name__ == "__main__":
         '.^.^.^.^.^...^.',
         '...............',
     ]
-
 
     test_splitters = find_splitters(test_input)
     test_timelines = count_timelines(test_input, test_splitters)
